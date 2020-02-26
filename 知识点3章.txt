@@ -1,0 +1,14 @@
+包装对象
+存取字符串、数字或布尔值的属性时创建的临时对象称为包装对象
+用来处理属性的引用，一旦属性引用结束，包装对象就会销毁
+转换为 Object 类型
+对象转换为自身
+undefined 和 null 转换为空对象 {}
+string/number/boolean 转换为包装对象
+真值（truthy）与假值（falsy）
+在 JavaScript 中，真值指的是在强制转换布尔值时，转换后的值为真的值。所有值都是真值，除非它们被定义为假值（即除 false、0、""、null、undefined 和 NaN 以外皆为真值）。
+undefined == null，结果是true。且它俩与所有其他值比较的结果都是false。
+String == Boolean，需要两个操作数同时转为Number。
+String/Boolean == Number，需要String/Boolean转为Number。
+
+
