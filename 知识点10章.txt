@@ -1,0 +1,50 @@
+属性访问机制
+ 实例对象继承原型对象的属性，即可以访问原型对象上的属性，好像本身拥有该属性一样
+ 构造函数与原型对象方法中的 this，指向调用该方法的对象
+ 当通过对象访问属性时，JavaScript 首先从本对象查找，接着是它的原型，以及原型的原型。即按照原型链查找属性。
+属性屏蔽
+ 当本对象和原型对象具有相同的属性时，不会再去原型对象上访问。也就是说本对象“遮蔽”或者“隐藏”了原型对象中的属性。
+ 覆写
+ 一个对象的属性可以覆写原型对象相同键的属性。此时，前者的属性最先被找到，可以隐藏原型对象的属性，使得原型对象的属性不能被访问。
+自有属性
+ 是指直接赋予该对象的属性，不需要从原型链上进行查找的属性
+继承属性
+ 从原型链上查找的属性
+检测属性
+ obj.hasOwnProperty(prop) 
+返回一个布尔值，判断对象自身属性中是否具有指定的属性
+ prop —— 要检测的属性的键 
+ Object.getOwnPropertyNames(obj)
+ 返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性）组成的数组
+ prop  in  obj
+ obj —— 检查它（包括它的原型链）是否包含具有指定名称的属性的对象。
+ 如果指定的属性在指定的对象或其原型链中，则 in 运算符返回 true。
+原型链 (prototype chain)
+ 每个对象拥有一个原型对象（__proto__），对象以其原型为模板、从原型继承方法和属性。原型对象也可能拥有原型对象，并从中继承方法和  属性，一层一层、以此类推。这种关系常被称为原型链 。 
+ 层层向上直到一个对象的原型对象为 null 。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。
+instance.__proto__ === Constructor.prototype
+ 所有对象具有 __proto__ 属性，没有 prototype 属性
+ 函数具有 prototype 属性，也具有__proto__属性
+Function.prototype 是例外，虽然是函数，但是不具有 prototype 属性
+Function created by Function
+ Function.__proto__==Function.prototype
+ Object created  by Function
+ Object.__proto__==Function.prototype
+ Function.prototype.__proto__ == Object.prototype
+ 给 Object.prototype 添加方法和属性，Function.prototype 也会拥有相同的方法和属性，相反则不具有
+ Function.prototype 是函数的起源，Object.prototype 是对象的起源
+Object.getPrototypeOf(obj) 
+ 返回指定对象的原型，如果没有继承属性，则返回 null 
+ Object.create(proto)
+ 创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
+ prototypeObj.isPrototypeOf(object)
+ 测试 prototypeObj 对象是否存在 object 对象的原型链上
+constructor
+ 对象的 constructor 属性用于返回创建该对象的函数，也就是我们常说的构造函数。例如：Array、Boolean、Date、Function、Number、Object
+ 在 JavaScript 中，通过构造函数创建的实例对象可以访问原型对象的constructor 属性。
+obj instanceof constructor
+ 返回一个布尔值，用于检测构造函数（constructor ）的 prototype 属性值是否出现在某个实例对象（obj）的原型链上
+toString
+ toString 是定义在 Object.prototype 对象上的方法，返回一个表示该对象的字符串。
+ 按照 JavaScript 属性访问规则，所有对象都可以访问到Object.prototype 上的的 toString 方法，而事实上，大部分的对象都实现了自身的 toString 方法，实现了属性覆写，这可能会导致 Object.prototype的 toString 被屏蔽。所以，需要通过 call/apply 来借用 Object.prototype 上的 toString 方法。
+ 使用 call 来借用该方法会返回调用者的类型字符串，格式为 [object xxx]，xxx 是调用者的数据类型。
