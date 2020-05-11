@@ -1,0 +1,39 @@
+静态方法( ES6 )
+ Array.from(...) 、Array.isArray(...) 、Array.of(...)等
+原型方法（添加和删除元素—— 破坏性）
+Array.prototype.shift()    Array.prototype.unshift(elem1?,elem2?,...)
+Array.prototype.pop()     Array.prototype.push(elem1?,elem2?,...)
+Array.prototype.splice(start,deleteCount?,elem1?,elem2?)
+原型方法（排序和颠倒元素顺序 —— 破坏性）
+ Array.prototype.reverse()
+ Array.prototype.sort(compareFunction？) 
+原型方法（合并、切分和连接 —— 非破坏性）
+ Array.prototype.concat(arr1?,arr2?,...)
+ Array.prototype.slice(begin?,end?) 
+ Array.prototype.join(separator?) //注意返回的类型
+原型方法（迭代-转换方法 —— 非破坏性）
+ Array.prototype.map(callback,thisValue?)
+ Array.prototype.filter(callback,thisValue?)
+原型方法（迭代-归约方法 —— 非破坏性）
+ Array.prototype.reduce(element,initialValue?)
+ Array.prototype.reduceRight(callback,initialValue?)
+forEach  遍历所有元素
+every 判断所有元素是否都符合条件
+some 判断是否有至少一个元素符合条件
+map 对元素重新组装，生成新的数组
+filter 过滤符合条件的元素
+异常捕获
+ catch 块指定一个标识符（在上面的示例中为 e），该标识符保存抛出异常信息
+ 标识符仅在 catch 块执行时存在；catch 块执行完成后，标识符不再可用
+对所有内置错误，catch 内的错误对象主要有两个属性：
+ name ：错误名称
+ message ：错误信息的文本描述
+ stack(非标准)：当前调用栈：关于导致错误的嵌套调用序列，用于调试目的
+ECMAScript 定义了七种类型的错误。
+ Error
+ ReferenceError: 引用错误
+ TypeError: 类型错误
+ RangeError: 范围错误
+ SyntaxError: 语法错误
+ EvalError: Eval错误   
+ URIError: URI错误

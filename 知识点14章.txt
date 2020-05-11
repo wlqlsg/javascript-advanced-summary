@@ -1,0 +1,14 @@
+元字符是具有特殊含义的字符，不能直接匹配使用的，必须使用反斜线（\） 作为前缀进行转义后才能使用。
+ 字符串、正则表达式字面量、正则表达式构造函数都使用反斜线（\） 作为转义字符的前缀。
+一般不推荐使用构造函数生成正则，而应该优先使用字面量。
+RegExp 原型方法
+ test()
+ exec()
+String 原型方法
+ replace()
+ match()
+ search()
+ split()
+RegExp 对象具有如下方法：
+ regObject.test(str);
+ regObject.exec(str);
