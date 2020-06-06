@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京东轮播图</title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        
+        #banner {
+            position: relative;
+            margin: 0px auto;
+            list-style: none;
+            position: absolute;
+        }
+        
+        #banner li {
+            float: left;
+            width: 1180px;
+            height: 940px;
+        }
+        
+        #round {
+            width: 1180px;
+            list-style: none;
+            position: relative;
+            top: 900px;
+            left: 200px;
+        }
+        
+        #round li {
+            float: left;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(207, 202, 202, 0.6);
+            color: #fff;
+            line-height: 15px;
+            text-align: center;
+            margin-left: 7px;
+            margin-right: 7px;
+        }
+        
+        #wrap {
+            margin: 0px auto;
+            width: 1180px;
+            height: 940px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #left {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            left: 0px;
+            top: 455px;
+            background-color: rgba(65, 64, 64, 0.3);
+            border-radius: 0px 20px 20px 0px;
+            text-align: center;
+            line-height: 30px;
+            color: seashell;
+        }
+        
+        #right {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            right: 0px;
+            top: 455px;
+            background-color: rgba(65, 64, 64, 0.3);
+            border-radius: 20px 0px 0px 20px;
+            text-align: center;
+            line-height: 30px;
+            color: seashell;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <ul id="banner">
+        </ul>
+        <ul id="round">
+        </ul>
+        <div id="left">
+            <</div>
+                <div id="right">></div>
+        </div>
+</body>
+<script src="jquery.js"></script>
+<script type="text/javascript">
+    var ArrImg = ["images/1.jpg", "images/2.jpg", "images/3.jpg", "images/4.jpg", "images/5.jpg", "images/6.jpg", "images/7.jpg", "images/8.jpg"];
+    var time = setInterval(changeImg, 1000);
+    for (var i = 0; i < ArrImg.length; i++) {
+        $("<li/>").css("background", "url(" + ArrImg[i] + ")").appendTo($("#banner"));
+        $("<li/>").appendTo($("#round"));
+    }
+    $("#banner").css("width", $("#banner li:eq(1)").width() * (ArrImg.length) + "px");
+    var liW = $("#banner li").width();
+    var index = 0;
+
+    function move(index) {
+        $("#banner").css("left", -liW * index);
+        $("#round li").css("background", "rgba(207, 202, 202,0.6)");
+        $("#round li").eq(index).css("background", "#fff");
+    }
+
+    function changeImg() {
+        move(index)
+        if (index == ArrImg.length - 1) {
+            index = -1;
+        }
+        index++;
+    }
+
+    $("#round li").on('mouseenter', function() {
+        index = $(this).index();
+        clearInterval(time);
+        move(index);
+    })
+    $("#round li").on('mouseout', function() {
+        time = setInterval(changeImg, 1000);
+    })
+
+    $("#wrap").hover(function() {
+        clearInterval(time);
+    }, function() {
+        time = setInterval(changeImg, 1000);
+    });
+
+    $("#left").add($("#right")).mouseenter(function() {
+        $(this).css("background", "rgba(65, 64, 64, 0.8)")
+    });
+    $("#left").add($("#right")).mouseleave(function() {
+        $(this).css("background", "rgba(65, 64, 64, 0.3)")
+    });
+
+    $("#right").on('click', function() {
+        clearInterval(time);
+        index = ((++index) % ArrImg.length);
+        move(index);
+    });
+    $("#left").on('click', function() {
+        clearInterval(time);
+        index = ((ArrImg.length + --index) % ArrImg.length);
+        move(index);
+    });
+</script>
+
+</html>
